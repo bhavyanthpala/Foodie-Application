@@ -1,0 +1,71 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card p-4 shadow-sm">
+        <h3 class="text-center mb-4">Foodie App</h3>
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+          <div class="form-group mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" id="username" class="form-control" formControlName="username">
+            <div *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched" class="text-danger">
+              <div *ngIf="signupForm.get('username')?.errors?.['required']">
+                Username is required.
+              </div>
+              <div *ngIf="signupForm.get('username')?.errors?.['minlength']">
+                Username must have at least 3 characters.
+              </div>
+              <div *ngIf="signupForm.get('username')?.errors?.['maxlength']">
+                Username cannot exceed 50 characters.
+              </div>
+              <div *ngIf="signupForm.get('username')?.errors?.['pattern']">
+                Username shouldn't start with a digit.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" class="form-control" formControlName="email">
+            <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="text-danger">
+              <div *ngIf="signupForm.get('email')?.errors?.['required']">
+                Email is required.
+              </div>
+              <div *ngIf="signupForm.get('email')?.errors?.['email']">
+                Please enter a valid email address.
+              </div>
+
+              <div *ngIf="signupForm.get('email')?.errors?.['domainLength']">
+                After '@' must contain at least 4 alphabetic characters.
+            </div>
+            <div *ngIf="signupForm.get('email')?.errors?.['localPartLength']">
+              Before '@' must have at least 5 characters.
+          </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" class="form-control" formControlName="password">
+            <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="text-danger">
+              <div *ngIf="signupForm.get('password')?.errors?.['required']">
+                Password is required.
+              </div>
+              <div *ngIf="signupForm.get('password')?.errors?.['minlength']">
+                Password must be at least 6 characters.
+              </div>
+              <div *ngIf="signupForm.get('password')?.errors?.['pattern']">
+                Password must contain at least one uppercase letter, one lowercase letter, one number, and one special
+                character.
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Sign Up</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

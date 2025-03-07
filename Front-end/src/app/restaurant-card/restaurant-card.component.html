@@ -1,0 +1,52 @@
+
+
+<div class = "card-body">
+  <app-search (searchChanged)="onSearchChanged($event)"></app-search>
+
+  <div class="filter-container">
+    <select id="location-filter" (change)="onLocationChanged($event)">
+      <option value="">All Cities</option>
+      <option *ngFor="let city of locations" [value]="city">{{ city }}</option>
+    </select>
+  </div>
+  
+
+<marquee *ngIf="isLoggedIn()" behavior="scroll" direction="left">If you're interested in any restaurant, you can add it to your favorites list♥♥♥ .</marquee>
+
+
+<div class="card-container">
+  <div class="card" *ngFor="let card of filteredData" (click)="viewDetails(card.restaurantId)">
+    <img [src]="card.imagePath" alt="{{ card.name }}" class="card-image"/>
+    <div class="card-content">
+      <h4>{{ card.name }}</h4>
+    <p>{{ card.cuisine[0].name }}</p>
+    <p>{{ card.location }}</p>
+    </div>
+    <button 
+    *ngIf="isLoggedIn()"
+        class="favorite-button" 
+        matTooltip="Add to favorites"
+        [ngClass]="{'favorited': card.isFavorited}" 
+        (click)="toggleFavorite(card,$event)">
+        <mat-icon>favorite</mat-icon>
+      </button>
+  </div>
+
+</div>
+
+</div>
+
+
+<!-- <app-search (searchChanged)="filterData($event)"></app-search>
+
+<div class="card-container">
+  <div class="card" *ngFor="let card of filteredData">
+    <a  [routerLink]="['/restaurant', card.restaurantId]">
+    <img [src]="card.imagePath" alt="{{ card.name }}" class="card-image"/>
+    <h4>{{ card.name }}</h4>
+    <p>{{ card.cuisine.name }}</p>
+    <p>{{ card.location }}</p>
+  </a>
+  </div>
+</div> -->
+
